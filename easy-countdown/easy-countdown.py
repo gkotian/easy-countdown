@@ -25,6 +25,9 @@ def seconds_until(time_str):
     return seconds_delta
 
 def seconds_in(time_str):
+    if time_str == '0s':
+        return 0
+
     # This regular expression should be improved. It currently allows erroneous
     # input like '24hf' to get through.
     regex = re.compile(
@@ -61,9 +64,6 @@ def calculate_seconds(time_str):
         return seconds
     except ValueError:
         pass
-
-    if time_str == '0s':
-        return 0
 
     if ':' in time_str:
         seconds = seconds_until(time_str)
