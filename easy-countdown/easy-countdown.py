@@ -1,5 +1,17 @@
 #!/usr/bin/env python
 
+################################################################################
+#
+#   Description:
+#   ------------
+#       A simple yet flexible countdown timer for the Linux command line.
+#
+#   Usage:
+#   ------
+#       $> easy-countdown <time/time-duration>
+#
+################################################################################
+
 import argparse
 import re
 import subprocess
@@ -7,6 +19,22 @@ import sys
 
 from datetime import datetime, time, timedelta
 from time import sleep
+
+
+################################################################################
+#
+#   Gets the number of seconds from the current time until the given time. If
+#   the given time has already passed on the current day, then it is assumed
+#   that the user wants to countdown until the given time on the next day.
+#
+#   Params:
+#       time_str = the given time value in HH:MM or HH:MM:SS format
+#
+#   Returns:
+#       the number of seconds from the current time until the given time, or -1
+#       if an error occurred
+#
+################################################################################
 
 def seconds_until(time_str):
     try:
@@ -23,6 +51,22 @@ def seconds_until(time_str):
         seconds_delta = 86400 + seconds_delta
 
     return seconds_delta
+
+
+################################################################################
+#
+#   Gets the number of seconds from the current time after which the given time
+#   duration would have elapsed.
+#
+#   Params:
+#       time_str = the given time duration in h, m, s notation (e.g. 10s, 15m,
+#           5m30s, 3h, 4h45m, 6h25m45s and so on)
+#
+#   Returns:
+#       the number of seconds from the current time after which the given time
+#       duration would have elapsed, or -1 if an error occurred
+#
+################################################################################
 
 def seconds_in(time_str):
     if time_str == '0s':
@@ -56,6 +100,23 @@ def seconds_in(time_str):
         return -1
 
     return seconds
+
+
+################################################################################
+#
+#   Gets the number of seconds from the current time until which the countdown
+#   should run.
+#
+#   Params:
+#       time_str = the given time value or time duration
+#           time value is expressed in HH:MM or HH:MM:SS format, whereas time
+#           duration is expressed in h, m, s notation
+#
+#   Returns:
+#       the number of seconds from the current time until which the countdown
+#       should run
+#
+################################################################################
 
 def calculate_seconds(time_str):
     # Plain integers are assumed to be seconds

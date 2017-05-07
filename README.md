@@ -21,6 +21,9 @@ Some examples: `10s`, `15m`, `5m30s`, `3h`, `4h45m`, `6h25m45s`.
 The discrete time value is expressed in `HH:MM[:SS]` notation.
 Some examples: `10:30`, `12:45:26`.
 
+If the time value has already passed on the current day, then it is assumed that
+the user wants to countdown until the given time on the next day.
+
 Supported distributions:
 ========================
 
